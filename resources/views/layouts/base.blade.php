@@ -98,7 +98,7 @@
                 <i data-lucide="home" class="w-5 h-5 mr-3"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6]">
+            <a href="/pembayaran" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6]"  {{ request()->is('pembayaran') ? 'bg-[#FFE4D6] font-semibold' : '' }}>
                 <i data-lucide="wallet-cards" class="w-5 h-5 mr-3"></i>
                 <span>Pembayaran</span>
             </a>
