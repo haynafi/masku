@@ -28,7 +28,7 @@
 
                 <!-- Submit -->
                 <div class="flex justify-center">
-                    <button type="submit" class="px-8 py-2 bg-[#E9C46A] hover:bg-[#E9B949] text-gray-800 font-medium rounded-md transition">
+                    <button type="submit" class="px-8 py-2 bg-[#CAEDB8] hover:bg-[#3E5526] text-gray-800 font-medium rounded-md transition">
                         Submit
                     </button>
                 </div>
@@ -37,7 +37,7 @@
     </div>
     
     <!-- Right side - Decorative area -->
-    <div class="hidden md:block md:w-1/2 bg-[#F8E1D5]">
+    <div class="hidden md:block md:w-1/2 bg-[#3E5526]">
         <!-- This is the peach/pink decorative area -->
     </div>
 </div>
