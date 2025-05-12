@@ -82,67 +82,80 @@
                 margin-left: 0;
             }
         }
+
+        /* Active menu item rectangle */
+        .menu-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: #2E7D32;
+        }
     </style>
 </head>
-<body class="bg-[#FFF5EE] font-sans antialiased text-gray-900">
+<body class="bg-gray-100 font-sans antialiased text-gray-900">
     <!-- Sidebar Overlay (Mobile only) -->
     <div id="sidebar-overlay" class="sidebar-overlay"></div>
     
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-[#FFF0E6] shadow-md">
+    <aside id="sidebar" class="w-64 bg-white shadow-md">
         <div class="p-6">
-            <h1 class="text-2xl font-bold text-[#B07C43]">MASKU</h1>
+            <h1 class="text-2xl font-bold text-[#2E7D32]">LOGO</h1>
         </div>
         <nav class="mt-6">
-            <a href="/dashboard" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6] {{ request()->is('dashboard') ? 'bg-[#FFE4D6] font-semibold' : '' }}">
+            <a href="/dashboard" class="menu-item relative flex items-center px-6 py-3 text-[#2E7D32] hover:bg-[#D0D9CD] {{ request()->is('dashboard') ? 'bg-[#D0D9CD] active font-semibold' : '' }}">
                 <i data-lucide="home" class="w-5 h-5 mr-3"></i>
-                <span>Dashboard</span>
+                <span>Home</span>
             </a>
-            <a href="/pembayaran" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6]"  {{ request()->is('pembayaran') ? 'bg-[#FFE4D6] font-semibold' : '' }}>
+            <a href="/pembelian" class="menu-item relative flex items-center px-6 py-3 text-[#2E7D32] hover:bg-[#D0D9CD] {{ request()->is('pembelian') ? 'bg-[#D0D9CD] active font-semibold' : '' }}">
                 <i data-lucide="wallet-cards" class="w-5 h-5 mr-3"></i>
-                <span>Pembayaran</span>
+                <span>Pembelian</span>
             </a>
-            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6]">
+            <a href="/transaksi" class="menu-item relative flex items-center px-6 py-3 text-[#2E7D32] hover:bg-[#D0D9CD] {{ request()->is('transaksi') ? 'bg-[#D0D9CD] active font-semibold' : '' }}">
                 <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i>
                 <span>Transaksi</span>
             </a>
-            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6]">
+            <a href="/report" class="menu-item relative flex items-center px-6 py-3 text-[#2E7D32] hover:bg-[#D0D9CD] {{ request()->is('report') ? 'bg-[#D0D9CD] active font-semibold' : '' }}">
                 <i data-lucide="bar-chart" class="w-5 h-5 mr-3"></i>
                 <span>Report</span>
             </a>
-            <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-[#FFE4D6]">
+            <a href="/setting" class="menu-item relative flex items-center px-6 py-3 text-[#2E7D32] hover:bg-[#D0D9CD] {{ request()->is('setting') ? 'bg-[#D0D9CD] active font-semibold' : '' }}">
                 <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
                 <span>Setting</span>
             </a>
         </nav>
         
         <!-- Mobile close button -->
-        <button id="close-sidebar" class="md:hidden absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+        <button id="close-sidebar" class="md:hidden absolute top-4 right-4 text-[#2E7D32] hover:text-gray-700">
             <i data-lucide="x" class="w-5 h-5"></i>
         </button>
-        
-        <!-- Footer -->
-        <div class="border-t border-[#E6D0C0] p-4 text-center text-sm text-gray-500 absolute bottom-0 w-full">
-            <p>footer</p>
-        </div>
     </aside>
 
     <!-- Main Content -->
     <div id="content-wrapper" class="min-h-screen">
         <!-- Topbar -->
-        <header class="bg-white shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+        <header class="bg-white shadow-sm px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-40">
             <div class="flex items-center">
-                <button id="sidebar-toggle" class="mr-4 text-gray-600 hover:text-gray-900 focus:outline-none">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                <button id="sidebar-toggle" class="mr-2 sm:mr-4 text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <i data-lucide="menu" class="w-5 sm:w-6 h-5 sm:h-6"></i>
                 </button>
-                <h1 class="text-lg font-semibold">{{ request()->is('dashboard') ? 'Dashboard' : 'MASKU' }}</h1>
+                <h1 class="text-base sm:text-lg font-semibold">
+            {{ ucfirst(str_replace('-', ' ', (Route::currentRouteName() ?? 'home'))) }}
+        </h1>
             </div>
-            <div class="flex items-center">
-                <span class="text-sm mr-4">Hi, {{ Auth::user()->name }}</span>
-                <form method="POST" action="{{ route('logout') }}" class="inline">
-                    @csrf
-                    <button type="submit" class="text-red-500 text-sm hover:underline">Logout</button>
-                </form>
+            <div class="relative">
+                <button id="user-dropdown" class="bg-[#2E7D32] text-white px-4 py-2 rounded-full flex items-center focus:outline-none hover:bg-[#256528] transition duration-200">
+                    <i data-lucide="user" class="w-4 sm:w-5 h-4 sm:h-5 mr-1 sm:mr-2"></i>
+                    <span class="text-sm sm:text-base">User Admin</span>
+                </button>
+                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="w-full text-left px-4 py-2 text-red-500 text-sm hover:bg-red-100 hover:text-red-600 rounded-lg transition duration-200">Logout</button>
+                    </form>
+                </div>
             </div>
         </header>
 
@@ -219,12 +232,28 @@
                 }
             });
             
-            // Debug helper - add this to help troubleshoot
+            // Debug helper
             console.log('Sidebar script loaded');
             sidebarToggle.addEventListener('click', function() {
                 console.log('Sidebar toggle clicked');
                 console.log('Is mobile view:', isMobileView());
                 console.log('Sidebar classes:', sidebar.className);
+            });
+
+            // Dropdown toggle functionality
+            const userButton = document.getElementById('user-dropdown');
+            const dropdown = document.getElementById('dropdown-menu');
+
+            userButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userButton.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
             });
         });
     </script>
